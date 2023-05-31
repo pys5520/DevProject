@@ -15,7 +15,7 @@
 			<tr>
 				<td>국적</td>
 				<td>
-					<form:select path="nationality" items="${nationalityCodeMap }" multiple="true" />
+					<form:select path="nationality" items="${nationalityCodeList }" multiple="true" itemValue="value" itemLabel="label" />
 				</td>
 			</tr>
 		</table>

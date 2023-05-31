@@ -13,9 +13,12 @@
 	<form:form modelAttribute="member" method="post" action="/formtag/selectbox/result">
 		<table>
 			<tr>
-				<td>국적</td>
+				<td>소유차량</td>
 				<td>
-					<form:select path="nationality" items="${nationalityCodeMap }" multiple="true" />
+					<form:select path="carList" multiple="true">
+						<form:option value="" label="---선택해주세요---"/>
+						<form:options items="${carCodeList }" itemValue="value" itemLabel="label"/>
+					</form:select>
 				</td>
 			</tr>
 		</table>
