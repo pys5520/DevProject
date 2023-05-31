@@ -10,7 +10,7 @@
 <body>
 	<h2>Spring Form</h2>
 	<p> 1) 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.</p>
-	<form:form modelAttribute="member" method="post" action="/formtag/checkbox/result"> 
+	<form:form modelAttribute="member" method="post" action="/formtag/checkbox/registerResult"> 
 		<table>
 			<tr>
 				<td>개발자여부</td>
@@ -20,6 +20,12 @@
 			</tr>
 			<tr>
 				<td>외국인여부</td>
+				<td>
+					<form:checkbox path="foreigner" value="true"/>
+				</td>
+			</tr>
+			<tr>
+				<td>취미</td>
 				<td>
 					<form:checkbox path="foreigner" value="true"/>
 				</td>

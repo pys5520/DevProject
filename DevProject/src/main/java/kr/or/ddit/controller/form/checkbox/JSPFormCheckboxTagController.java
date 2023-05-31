@@ -51,7 +51,7 @@ public class JSPFormCheckboxTagController {
 		return "form/checkbox/registerForm01";
 	}
 	
-	@RequestMapping(value = "/registerResult", method = RequestMethod.GET)
+	@RequestMapping(value = "/registerResult", method = RequestMethod.POST)
 	public String registerResult(Member member, Model model) {
 		log.info("registerResult()실행...!");
 		log.info("member.developer : " + member.getDeveloper());
