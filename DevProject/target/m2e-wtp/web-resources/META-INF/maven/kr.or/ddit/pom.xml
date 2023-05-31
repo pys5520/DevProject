@@ -206,6 +206,13 @@
 		 </dependency>
 		<!-- Database settings End -->
 		
+		<!-- 입력값을 검증하기 위한 라이브러리 의존 관계 정의 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.2.Final</version>
+		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
