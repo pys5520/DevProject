@@ -25,4 +25,26 @@ public class BoardSercieImpl implements IBoardService {
 	public List<Board> list() {
 		return mapper.list();
 	}
+
+	@Override
+	public Board read(int boardNo) {
+		return mapper.read(boardNo);
+	}
+
+	@Override
+	public void update(Board board) {
+		mapper.update(board);
+		
+	}
+
+	@Override
+	public void delete(int boardNo) {
+		mapper.delete(boardNo);
+		
+	}
+
+	@Override
+	public List<Board> search(Board board) {
+		return mapper.search(board);
+	}
 }
