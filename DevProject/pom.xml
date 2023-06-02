@@ -233,6 +233,19 @@
 		
 		<!-- Tiles 라이브러리 의존 관계 등록 끝 -->
 		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
+		
+		<!-- 데이터 StringUtils를 이용할 때 사용 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.6</version>
+		</dependency>
+		
 		<!-- 입력값을 검증하기 위한 라이브러리 의존 관계 정의 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
