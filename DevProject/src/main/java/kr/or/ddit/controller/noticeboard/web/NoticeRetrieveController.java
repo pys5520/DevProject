@@ -15,4 +15,9 @@ public class NoticeRetrieveController {
 		log.info("noticeList() 실행...!");
 		return "notice/list";
 	}
+	
+	@RequestMapping(value = "/detail.do")
+	public String noticeDetail() {
+		return "notice/detail";
+	}
 }

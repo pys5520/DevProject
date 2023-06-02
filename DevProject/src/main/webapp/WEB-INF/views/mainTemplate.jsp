@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/plugins/fontawesome-free/css/all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/dist/css/adminlte.min.css">
 <script src="${pageContext.request.contextPath }/resources/plugins/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
