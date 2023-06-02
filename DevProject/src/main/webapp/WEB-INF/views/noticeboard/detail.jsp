@@ -25,11 +25,11 @@
 			<div class="col-md-12">
 				<div class="card card-primary">
 					<div class="card-header">
-						<h3 class="card-title">제목입니다!!</h3>
-						<div class="card-tools">관리자 2022-12-12 12:11 1456</div>
+						<h3 class="card-title">${notice.boTitle }</h3>
+						<div class="card-tools">${notice.boWriter } ${notice.boDate } ${notice.boHit }</div>
 					</div>
 					<form id="quickForm" novalidate="novalidate">
-						<div class="card-body">내용입니다.</div>
+						<div class="card-body">${notice.boContent }</div>
 						<div class="card-footer bg-white">
 							<ul
 								class="mailbox-attachments d-flex align-items-stretch clearfix">
@@ -50,14 +50,50 @@
 							</ul>
 						</div>
 						<div class="card-footer">
-							<button type="submit" class="btn btn-primary">목록</button>
-							<button type="submit" class="btn btn-info">수정</button>
-							<button type="submit" class="btn btn-danger">삭제</button>
+							<button type="button" id="btnList" class="btn btn-primary">목록</button>
+							<button type="button" id="btnModify" class="btn btn-info">수정</button>
+							<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 						</div>
 					</form>
 				</div>
 			</div>
+			<form action="/notice/delete.do" method="post" id="noticeForm">
+				<input type="hidden" name="boNo" value="${notice.boNo }">
+			</form>
 			<div class="col-md-6"></div>
 		</div>
 	</div>
 </section>
+<script>
+$(function(){
+	var btnList = $('#btnList');
+	var btnModify = $('#btnModify');
+	var btnDelete = $('#btnDelete');
+	var noticeForm = $('#noticeForm')
+	
+	btnList.on('click', function(){
+		location.href = "/notice/list.do";
+	})
+	btnModify.on('click', function(){
+		noticeForm.attr('method', 'get');
+		noticeForm.attr('action', '/notice/update.do');
+		noticeForm.submit();
+	})
+	btnDelete.on('click', function(){
+		if(confirm("정말 삭제하시겠습니까?")){
+			noticeForm.submit();
+		}
+	})
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+
