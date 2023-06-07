@@ -20,4 +20,23 @@
 			#{fullName}, seq_item3.currval, sysdate
 		)
 	</insert>
+	
+	<select id="list" resultType="item3">
+		select item_id, item_name, price, description
+		from item3
+		order by item_id desc
+	</select>
+	
+	<select id="read" parameterType="int" resultType="item3">
+		select item_id, item_name, price, description
+		from item3
+		where item_id = #{itemId}
+	</select>
+	
+	<select id="getAttach" parameterType="int" resultType="string">
+		select fullname
+		from item3_attach
+		where item_id = #{itemId}
+		order by regdate desc
+	</select>
 </mapper>

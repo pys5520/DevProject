@@ -8,38 +8,39 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
-	<h2>Register</h2>
-	<form id="item3" action="/item3/register" method="post" enctype="multipart/form-data">
+	<h2>Modify</h2>
+	<form action="/item3/modify" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="itemId" value="${item.itemId }">
 		<table>
 			<tr>
 				<td>상품명</td>
 				<td>
-					<input type="text" name="itemName" id="itemName">
+					<input type="text" name="itemName" id="itemName" value="${item.itemName }">
 				</td>
 			</tr>
 			<tr>
 				<td>가격</td>
 				<td>
-					<input type="text" name="price" id="price">
+					<input type="text" name="price" id="price" value="${item.price }">
 				</td>
 			</tr>
 			<tr>
 				<td>파일</td>
 				<td>
-					<input type="file"  id="inputFile">
+					<input type="file" id="inputFile">
 					<div class="uploadedList"></div>
 				</td>
 			</tr>
 			<tr>
 				<td>개요</td>
 				<td>
-					<textarea rows="10" cols="20" name="description"></textarea>
+					<textarea rows="10" cols="30" name="description">${item.description }</textarea>
 				</td>
 			</tr>
 		</table>
 		<div>
-			<button type="submit" id="btnRegister">Register</button>
-			<button type="button" id="btnList" onclick="javascript:location.href='/item3/list'">List</button>
+			<button type="submit" id="btnModify">Modify</button>
+			<button type="button" id="btnList" onclick="javascript:location.href='/item/list'">List</button>
 		</div>
 	</form>
 </body>
@@ -47,6 +48,34 @@
 $(function(){
 	let inputFile = $('#inputFile');
 	
+	let itemId = ${item.itemId};
+	console.log("itemId : " + itemId);
+	
+	$.getJSON("/item3/getAttach/" + itemId, function(list){
+		$(list).each(function(){
+			console.log("data : " + this);
+			let data = this;
+			let str = "";
+			
+			if(checkImageType(data)){	// 이미지면 이미지태그를 이용하여 출력
+				str = "<div>";
+				str += "	<a href='/item3/displayFile?fileName=" + data + "'>";
+				str += "		<img src='/item3/displayFile?fileName=" + getThumbnailName(data) + "'/>";
+				str += "	</a>";
+				str += "	<span>X</span>";
+				str += "</div>";
+			}else{
+				str += "<div>";
+				str += "	<a href='item3/displayFile?fileName=" + data + "'>" + getOriginalName(data) + "</a>";
+				str += "	<span>X</span>";
+				str += "</div>";
+			}
+			$('.uploadedList').append(str);
+			
+		})
+	})
+	
+	// 업로드한 이미지 'x'클릭
 	$('.uploadedList').on('click', 'span', function(){
 		$(this).parent('div').remove();
 	});
@@ -110,7 +139,7 @@ $(function(){
 			}
 		})
 	})
-	
+
 	function getThumbnailName(fileName){
 		let front = fileName.substr(0,12);	// /2023/06/07 폴터
 		let end = fileName.substr(12);		// 뒤 파일명
@@ -120,7 +149,7 @@ $(function(){
 		
 		return front + "s_" + end;
 	}
-	
+
 	function getOriginalName(fileName){
 		if(checkImageType(fileName)){
 			return;
@@ -129,21 +158,16 @@ $(function(){
 		let idx = fileName.indexOf("_") + 1;
 		return fileName.substr(idx);
 	}
-	
+
 	// 이미지 파일인지 확인한다.
 	function checkImageType(fileName){
 		let pattern = /jpg|gif|png|jpeg/;
 		return fileName.match(pattern);	// 패턴과 일치하면 true (이미지구나?)
 	}
+
 })
 </script>
 </html>
-
-
-
-
-
-
 
 
 
