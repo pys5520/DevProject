@@ -45,5 +45,28 @@ public class ItemServiceImpl3 implements ItemService3 {
 	public List<String> getAttach(int itemId) {
 		return mapper.getAttach(itemId);
 	}
+
+	@Override
+	public void modify(Item3 item) {
+		mapper.modify(item);
+		
+		int itemId = item.getItemId();
+		mapper.deleteAttach(itemId);
+		String[] files = item.getFiles();
+		
+		if(files == null) {
+			return;
+		}
+		
+		for(String fileName : files) {
+			mapper.modifyAttach(fileName, itemId);
+		}
+	}
+
+	@Override
+	public void remove(Item3 item) {
+		mapper.deleteAttach(item.getItemId());
+		mapper.delete(item.getItemId());
+	}
 	
 }

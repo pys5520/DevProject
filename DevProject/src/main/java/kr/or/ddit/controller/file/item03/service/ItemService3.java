@@ -13,5 +13,9 @@ public interface ItemService3 {
 	public Item3 read(int itemId);
 
 	public List<String> getAttach(int itemId);
+
+	public void modify(Item3 item);
+
+	public void remove(Item3 item);
 	
 }

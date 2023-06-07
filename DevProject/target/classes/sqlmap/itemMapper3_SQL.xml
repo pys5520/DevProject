@@ -39,4 +39,51 @@
 		where item_id = #{itemId}
 		order by regdate desc
 	</select>
+	
+	<update id="modify" parameterType="item3">
+		update item3
+		set
+			item_name = #{itemName},
+			price = #{price},
+			description = #{description}
+		where item_id = #{itemId}
+	</update>
+	
+	<delete id="deleteAttach" parameterType="int">
+		delete from item3_attach
+		where item_id = #{itemId}
+	</delete>
+	
+	<insert id="modifyAttach">
+		insert into item3_attach(
+			fullname, item_id, regdate
+		) values (
+			#{fullName}, #{itemId}, sysdate
+		)
+		
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from item3
+		where item_id = #{itemId}
+	</delete>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

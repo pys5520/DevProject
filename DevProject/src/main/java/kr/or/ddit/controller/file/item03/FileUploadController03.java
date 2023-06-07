@@ -156,12 +156,39 @@ public class FileUploadController03 {
 		return "item3/modify";
 	}
 	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String item3Modify(Item3 item, Model model) {
+		String[] files = item.getFiles();
+		
+		for (int i = 0; i < files.length; i++) {
+			log.info("files[" + i + "] : " + files[i]);
+		}
+		
+		itemService.modify(item);
+		model.addAttribute("msg", "수정이 완료되었습니다.");
+		return "item3/success";
+	}
+	
 	// JSON GET 방식으로 요청 
 	@ResponseBody
 	@RequestMapping(value = "/getAttach/{itemId}")
 	public List<String> getAttach(@PathVariable("itemId") int itemId){
 		log.info("itemId : " + itemId);
 		return itemService.getAttach(itemId);
+	}
+	
+	@RequestMapping(value = "/remove", method = RequestMethod.GET)
+	public String item3RemoveForm(int itemId, Model model) {
+		Item3 item = itemService.read(itemId);
+		model.addAttribute("item", item);
+		return "item3/remove";
+	}
+	
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String item3Remove(Item3 item, Model model) {
+		itemService.remove(item);
+		model.addAttribute("msg", "삭제가 완료되었습니다.");
+		return "item3/success";
 	}
 }
 
