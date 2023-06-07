@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
 	<h2>Register</h2>
-	<form action="/item3/register" method="post" enctype="multipart/form-data">
+	<form id="item3" action="/item3/register" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>상품명</td>
@@ -47,6 +47,29 @@
 $(function(){
 	let inputFile = $('#inputFile');
 	
+	$('.uploadedList').on('click', 'span', function(){
+		$(this).parent('div').remove();
+	});
+	
+	$('#item3').submit(function(event){
+		event.preventDefault();
+		
+		let that = $(this);	// 현재 눌른 form 태그
+		let str = "";
+		
+		$('.uploadedList a').each(function(index){
+			let value = $(this).attr('href');
+			value = value.substr(28);	// '?fileName=' 다음에 나오는 값
+			
+			str += "<input type='hidden' name='files["+ index + "]' value='" + value + "'>";		
+		})
+		
+		console.log("str : " + str);
+		
+		that.append(str);
+		that.get(0).submit();	// form의 첫번째를 가져와서 submit() 처리
+	})
+	
 	//Open파일을 변경했을 떄 발동
 	inputFile.on('change', function(event){
 		console.log("change event...");
@@ -55,7 +78,7 @@ $(function(){
 		
 		console.log(file);	// 로그 출력(확인용)
 		
-		let formData = new FormData();
+		let formData = new FormData();	// 폼을 쉽게 보내도록 도와주는 객체
 		formData.append("file", file);
 		
 		$.ajax({
@@ -63,7 +86,7 @@ $(function(){
 			url : '/item3/uploadAjax',
 			data : formData,
 			dataType : 'text',
-			processData : false,
+			processData : false,	// 파일 전송시에 사용(기본값은 true)
 			contentType : false,
 			success : function(data){
 				console.log(data);	// 결과 출력(확인용)
@@ -87,6 +110,31 @@ $(function(){
 			}
 		})
 	})
+	
+	function getThumbnailName(fileName){
+		if(checkImageType(fileName)){
+			return;
+		}
+		
+		let idx = fileName.indexOf("_") + 1;
+		return fileName.substr(idx);
+	}
+	
+	function getOriginalName(fileName){
+		let front = fileName.substr(0,12);	// /2023/06/07 폴터
+		let end = fileName.substr(12);		// 뒤 파일명
+		
+		console.log("front : " + front);
+		console.log("end : " + end);
+		
+		return front + "s_" + end;
+	}
+	
+	// 이미지 파일인지 확인한다.
+	function checkImageType(fileName){
+		let pattern = /jpg|gif|png|jpeg/;
+		return fileName.match(pattern);	// 패턴과 일치하면 true (이미지구나?)
+	}
 })
 </script>
 </html>

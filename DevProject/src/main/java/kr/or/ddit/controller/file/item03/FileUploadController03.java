@@ -1,21 +1,29 @@
 package kr.or.ddit.controller.file.item03;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.controller.file.item03.service.ItemService3;
+import kr.or.ddit.vo.Item3;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/item3")
 @Slf4j
 public class FileUploadController03 {
+	
+	
 	/*
 	 * 13장 파일 업로드
 	 * 
@@ -37,6 +45,10 @@ public class FileUploadController03 {
 	 * 			- 여기까지 확인
 	 */
 	
+	@Inject
+	private ItemService3 itemService;
+	
+	
 	// root-context.xml 에서 설정한 uploadPath 빈등록 path 경로를 사용한다.
 	@Resource(name = "uploadPath")
 	private String resourcePath;
@@ -49,13 +61,51 @@ public class FileUploadController03 {
 	// uploadAjax 메소드는 브라우저에서 넘겨받은 파일을 업로드하는 기능
 	@ResponseBody	// 서버에서 클라이언트로 응답 보낼떄 담아서 보내는 기능
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST, produces = "text/plain; charset=utf-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file){
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws IOException{
 		log.info("originalName : " + file.getOriginalFilename());
 		
-		String savedName = uploadFileUtils.uploadFile(resourcePath, file.getOriginalFilename(), file.getBytes());
+		String savedName = UploadFileUtils.uploadFile(resourcePath, file.getOriginalFilename(), file.getBytes());
 		return new ResponseEntity<String>(savedName, HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String item3Register(Item3 item, Model model) {
+		String[] files = item.getFiles();
+		
+		for (int i = 0; i < files.length; i++) {
+			log.info("files[" + i + "] : "+ files[i]);
+		}
+		
+		itemService.register(item);
+		model.addAttribute("msg", "등록이 완료되었습니다.");
+		return "item3/success";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

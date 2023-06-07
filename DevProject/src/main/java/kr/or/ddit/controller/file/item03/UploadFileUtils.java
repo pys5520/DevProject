@@ -1,15 +1,20 @@
 package kr.or.ddit.controller.file.item03;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
 import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
 	
-	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) {
+	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws IOException {
 		UUID uuid = UUID.randomUUID();
 		String savedName = uuid.toString() + "_" + originalName;
 		
@@ -27,7 +32,21 @@ public class UploadFileUtils {
 		}
 		return uploadedFileName;
 	}
-	
+	//
+	private static void makeThumbnail(String uploadPath, String path, String fileName) throws IOException {
+		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
+		
+		// Method.AUTOMATIC : 최소 시간 내에 가장 잘 보이는 이미지를 얻기 위한 사용 방식
+		// Mode.FIT_TO_HEIGHT : 이미지 방향과 상관없이 주어진 높이 내에서 가장 잘 맞는 이미지로 계산(높이위주)
+		// targetSize : 값 100, 정사각형 사이즈로 100x100
+		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
+		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
+		
+		File newFile = new File(thumbnailName);
+		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+		ImageIO.write(destImg, formatName.toUpperCase(), newFile);	// 's_'가 붙은 썸네일 이미지를 만든다.
+	}
+	//
 	private static String calcPath(String uploadPath) {
 		Calendar cal = Calendar.getInstance();
 		String yearPath = File.separator + cal.get(Calendar.YEAR);

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.ItemMapper3">
+	
+	<insert id="register" parameterType="item3">
+		insert into item3(
+			item_id, item_name, price, description
+		) values (
+			seq_item3.nextval, #{itemName}, #{price}, #{description}
+		)
+		
+	</insert>
+	
+	<insert id="addAttach" parameterType="string">
+		insert into item3_attach(
+			fullname, item_id, regdate
+		) values(
+			#{fullName}, seq_item3.currval, sysdate
+		)
+	</insert>
+</mapper>
