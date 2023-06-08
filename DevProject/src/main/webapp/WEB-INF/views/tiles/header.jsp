@@ -34,6 +34,30 @@
 						class="nav-icon fas fa-tachometer-alt"></i>
 						<p>공지사항</p>
 				</a></li>
+				<li class="nav-item"><a href="#"
+					class="nav-link"> <i class="nav-icon fas fa-edit"></i>
+						<p>
+							Forms <i class="fas fa-angle-left right"></i>
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a href="/notice/generalForm"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>General Elements</p>
+						</a></li>
+						<li class="nav-item"><a href="../forms/advanced.html"
+							class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<p>Advanced Elements</p>
+						</a></li>
+						<li class="nav-item"><a href="../forms/editors.html"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Editors</p>
+						</a></li>
+						<li class="nav-item"><a href="../forms/validation.html"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Validation</p>
+						</a></li>
+					</ul></li>
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->

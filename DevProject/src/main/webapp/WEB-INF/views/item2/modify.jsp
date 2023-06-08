@@ -58,7 +58,7 @@
 		</table>
 		<div>
 			<button type="submit" id="btnModify">Modify</button>
-			<button type="button" id="btnList" onclick="javascript:location.href='/item/list'">List</button>
+			<button type="button" id="btnList" onclick="javascript:location.href='/item2/list'">List</button>
 		</div>
 	</form>
 </body>

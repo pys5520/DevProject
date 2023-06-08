@@ -13,7 +13,10 @@
 		</if>
 	</sql>
 
-
+	<!-- 
+		before : noticeVO(bo_no=0)
+		after : noticeVO(bo_no=3)	채워주는역할
+	 -->
 	<insert id="insertNotice" parameterType="noticeVO" useGeneratedKeys="true">
 		<selectKey keyProperty="boNo" resultType="int" order="BEFORE">
 			select seq_notice.nextval from dual
