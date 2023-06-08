@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -98,6 +99,39 @@ public class NoticeLoginController {
 	public String noticeLoginForget(Model model) {
 		model.addAttribute("bodyText", "login-page");
 		return "conn/forget";
+	}
+	
+	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	public String loginCheck(DDITMemberVO memberVO, Model model, HttpServletRequest req) {
+		String goPage = "";
+		
+		Map<String, String> errors = new HashMap<String, String>();
+		if(StringUtils.isBlank(memberVO.getMemId())) {
+			errors.put("memId", "아이디를 입력해주세요!");
+		}
+		if(StringUtils.isBlank(memberVO.getMemPw())) {
+			errors.put("memPw", "비밀번호를 입력해주세요!");
+		}
+		
+		if(errors.size()>0) {
+			model.addAttribute("bodyText", "login-page");
+			model.addAttribute("errors", errors);
+			model.addAttribute("member", memberVO);
+			goPage = "conn/login";
+		}else {
+			DDITMemberVO member = noticeService.loginCheck(memberVO);
+			if(member != null) {
+				HttpSession session = req.getSession();
+				session.setAttribute("SessionInfo", member);
+				goPage = "redirect:/notice/list.do";
+			}else {
+				model.addAttribute("bodyText", "login-page");
+				model.addAttribute("message", "서버 에러, 로그인 정보를 정확하게 입력해주세요!");
+				model.addAttribute("member", memberVO);
+				goPage = "conn/login";
+			}
+		}
+		return goPage;
 	}
 	
 	

@@ -8,4 +8,6 @@ public interface LoginMapper {
 
 	public int signup(DDITMemberVO memberVO);
 
+	public DDITMemberVO loginCheck(DDITMemberVO memberVO);
+
 }

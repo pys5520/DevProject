@@ -26,4 +26,6 @@ public interface INoticeService {
 	public ServiceResult idCheck(String memId);
 
 	public ServiceResult signup(HttpServletRequest req, DDITMemberVO memberVO);
+
+	public DDITMemberVO loginCheck(DDITMemberVO memberVO);
 }

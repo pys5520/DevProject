@@ -21,4 +21,12 @@
 			#{memPhone}, #{memPostCode}, #{memAddress1}, #{memAddress2}, #{memAgree}, #{memProfileImg}, sysdate
 		)
 	</insert>
+	
+	<select id="loginCheck" parameterType="dditmemberVO" resultType="dditmemberVO">
+		select
+			mem_no, mem_id, mem_pw, mem_name, mem_gender, mem_email, mem_phone, mem_postcode, mem_address1,
+			mem_address2, mem_agree, mem_profileimg, mem_regdate
+		from dditmember
+		where mem_id = #{memId} and mem_pw = #{memPw}
+	</select>
 </mapper>

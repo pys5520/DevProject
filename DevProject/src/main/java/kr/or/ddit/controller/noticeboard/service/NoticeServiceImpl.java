@@ -139,6 +139,11 @@ public class NoticeServiceImpl implements INoticeService {
 		}
 		return result;
 	}
+
+	@Override
+	public DDITMemberVO loginCheck(DDITMemberVO memberVO) {
+		return loginMapper.loginCheck(memberVO);
+	}
 	
 }
 
