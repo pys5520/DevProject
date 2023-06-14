@@ -19,7 +19,7 @@
 			<tr>
 				<td>제목</td>
 				<td>
-					<input type="text" id="title" name="title" value="${board.title }">
+					<input type="text" id="title2" name="title2" value="${board.title }">
 				</td>
 			</tr>
 			<tr>
@@ -52,14 +52,14 @@ $(function(){
 	var btnList = $('#btnList');
 	
 	btnRegister.on('click', function(){
-		var title = $('#title').val();
+// 		var title = $('#title').val();
 		var content = $('#content').val();
 		var writer = $('#writer').val();
 		
-		if(title == null || title == ""){
-			alert("제목을 입력해주세요");
-			return false;
-		}
+// 		if(title == null || title == ""){
+// 			alert("제목을 입력해주세요");
+// 			return false;
+// 		}
 		if(content == null || content == ""){
 			alert("내용을 입력해주세요");
 			return false;

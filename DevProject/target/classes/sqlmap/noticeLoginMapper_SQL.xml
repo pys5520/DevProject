@@ -29,4 +29,17 @@
 		from dditmember
 		where mem_id = #{memId} and mem_pw = #{memPw}
 	</select>
+	
+	<select id="idForgetProcess" parameterType="dditmemberVO" resultType="string">
+		select mem_id from dditmember
+		where mem_email = #{memEmail}
+		and mem_name = #{memName}
+	</select>
+	
+	<select id="pwForgetProcess" parameterType="dditmemberVO" resultType="string">
+		select mem_pw from dditmember
+		where mem_id = #{memId} 
+		and mem_email = #{memEmail}
+		and mem_name = #{memName}
+	</select>
 </mapper>
