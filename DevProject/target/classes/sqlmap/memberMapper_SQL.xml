@@ -65,6 +65,7 @@
 	<delete id="delete" parameterType="int">
 		delete from member where user_no = #{userNo}
 	</delete>
+	
 </mapper>
 
 

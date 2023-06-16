@@ -2,6 +2,7 @@ package kr.or.ddit.mapper;
 
 import java.util.List;
 
+import kr.or.ddit.vo.DDITMemberVO;
 import kr.or.ddit.vo.MemberAuth;
 import kr.or.ddit.vo.MemberVO;
 
@@ -20,5 +21,6 @@ public interface MemberMapper {
 	public void deleteAuth(int userNo);
 
 	public void delete(int userNo);
+
 
 }
