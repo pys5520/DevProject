@@ -126,6 +126,9 @@ $(function(){
 		$.ajax({
 			type : 'post',
 			url : '/notice/idCheck.do',
+			beforeSend : function(xhr){
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
 			data : {memId : id},
 			success : function(res){
 				console.log("아이디 중복확인 이벤트 결과 : " + res);

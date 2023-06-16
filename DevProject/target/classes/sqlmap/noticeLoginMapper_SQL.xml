@@ -40,10 +40,10 @@
 		</selectKey>
 		insert into dditmember(
 			mem_no, mem_id, mem_pw, mem_name, mem_gender, mem_email, mem_phone, mem_postcode, mem_address1,
-			mem_address2, mem_agree, mem_profileimg, mem_regdate
+			mem_address2, mem_agree, mem_profileimg, mem_regdate, enabled
 		) values(
 			#{memNo}, #{memId}, #{memPw}, #{memName}, #{memGender}, #{memEmail},
-			#{memPhone}, #{memPostCode}, #{memAddress1}, #{memAddress2}, #{memAgree}, #{memProfileImg}, sysdate
+			#{memPhone}, #{memPostCode}, #{memAddress1}, #{memAddress2}, #{memAgree}, #{memProfileImg}, sysdate, '1'
 		)
 	</insert>
 	
