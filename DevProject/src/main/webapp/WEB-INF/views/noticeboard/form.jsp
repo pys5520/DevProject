@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <section class="content-header">
 	<c:set value="등록" var="name"/>
 	<c:if test="${status eq 'u' }">
@@ -24,13 +25,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-primary">
-				<form action="/notice/insert.do" method="post" id="noticeForm" enctype="multipart/form-data">
+				<form action="/notice/insert.do?${_csrf.parameterName }=${_csrf.token}" method="post" id="noticeForm" enctype="multipart/form-data">
 					<c:if test="${status eq 'u' }">
 						<input type="hidden" name="boNo" id="boNo" value="${notice.boNo }">
 					</c:if>
 					
 					<div class="card-header">
-						<h3 class="card-title">공지사항  ${name }</h3>
+						<h3 class="card-title">공지사항 ${name }</h3>
 						<div class="card-tools"></div>
 					</div>
 					<div class="card-body">
@@ -105,7 +106,7 @@
 $(function(){
 	CKEDITOR.replace("boContent", {
 		footnotesPrefix: "a",
-		filebrowserUploadUrl: '/imageUpload.do'
+		filebrowserUploadUrl: '/imageUpload.do?${_csrf.parameterName }=${_csrf.token}'
 	});
 	
 	var listBtn = $('#listBtn');
@@ -126,7 +127,7 @@ $(function(){
 		}
 		
 		if($(this).val() == "수정"){
-			noticeForm.attr('action', '/notice/update.do');
+			noticeForm.attr('action', '/notice/update.do?${_csrf.parameterName }=${_csrf.token}');
 		}
 		
 		noticeForm.submit();

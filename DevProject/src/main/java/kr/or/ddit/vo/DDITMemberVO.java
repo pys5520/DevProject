@@ -22,6 +22,7 @@ public class DDITMemberVO {
 	private String memRegDate;			// 가입일
 	private MultipartFile imgFile;		// 프로필 이미지 파일 공간
 	private String memProfileImg;		// 프로필 이미지 파일명(경로+파일명)
+	private String enabled;				
 	
 	private List<DDITMemberAuthVO> authList;
 }

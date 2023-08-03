@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
    <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" data-widget="pushmenu"
          href="#" role="button"><i class="fas fa-bars"></i></a></li>
    </ul>
 </nav>
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
    <a href="" class="brand-link"> <img
       src="${pageContext.request.contextPath }/resources/dist/img/AdminLTELogo.png"
@@ -19,17 +19,16 @@
    <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-         <c:if test="${not empty member }">
-            <c:set target="${sessionScope.SessionInfo }" property="memProfileImg" value="${member.memProfileImg }"/>
-            <c:set target="${sessionScope.SessionInfo }" property="memName" value="${member.memName }"/>
-         </c:if>
+      	<sec:authentication property="principal.member" var="member"/>
+  <%--           <c:set target="${sessionScope.SessionInfo }" property="memProfileImg" value="${member.memProfileImg }"/>
+            <c:set target="${sessionScope.SessionInfo }" property="memName" value="${member.memName }"/> --%>
          <div class="image">
             <img
-               src="${sessionScope.SessionInfo.memProfileImg }"
+               src="${member.memProfileImg }"
                class="img-circle elevation-2" alt="User Image" style="width: 40px; height: 40px;">
          </div>
          <div class="info">
-            <a href="/notice/profile.do" class="d-block">${SessionInfo.memName }</a>
+            <a href="/notice/profile.do" class="d-block">${member.memName }</a>
          </div>
       </div>
       <nav class="mt-2">

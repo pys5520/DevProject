@@ -273,8 +273,8 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	@Override
-	public DDITMemberVO selectMember(DDITMemberVO sessionMember) {
-		return profileMapper.selectMember(sessionMember);
+	public DDITMemberVO selectMember(String memId) {
+		return profileMapper.selectMember(memId);
 	}
 
 	@Override
